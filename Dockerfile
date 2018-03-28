@@ -20,11 +20,7 @@ RUN apt-get update -q && apt-get install -y \
 
 FROM packages as source  
 
-RUN apt-get update -q && apt-get install -y \    
-    git					    
-
-RUN mkdir /qt-src                       && \
-    git clone                              \
+RUN git clone                              \
         --depth=1                          \
         --recurse-submodules               \
         --single-branch                    \
@@ -33,9 +29,6 @@ RUN mkdir /qt-src                       && \
         /qt-src
 
 FROM source as library
-
-RUN mkdir /qt-src
-COPY --from=source /qt-src /qt-src
 
 WORKDIR /qt-src
 
