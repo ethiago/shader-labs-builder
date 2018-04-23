@@ -54,6 +54,12 @@ COPY --from=library /qt /qt
 
 ENV PATH=/qt/bin:$PATH
 
+RUN yum check-update && yum install -y  \
+    gcc                                 \
+    gcc-c++                             \
+    mesa-libGL-devel                    \
+    mesa-libGLU-devel
+
 WORKDIR /workspace
 
 CMD ["/bin/bash"]
